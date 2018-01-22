@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <ul>
+    <li>
+      Create folder - react-playlist
+      Create folder src
+      Create file src/index.html
+      Create file .gitignore
+        /node-modules
+        /dist
+    </li>
+    <li>
+      $ git init
+      $ npm init
+      $ npm install react react-dom react-router --save
+      $ npm install babel babel-loader babel-core babel-preset-es2015 babel-preset-react --save-dev
+      $ npm install react-router-dom --save-dev
+      $ npm install webpack webpack-dev-server --save-dev
+      $ npm install style-loader css-loader --save-dev
+    </li>
+    <li>
+      Create file webpack.config.js
+        var path = require('path');
+
+        module.exports = {
+
+          entry: path.resolve(__dirname, 'src') + '/app/index.js',
+          output: {
+            path: path.resolve(__dirname, 'dist') + '/app',
+            filename: 'bundle.js',
+            publicPath: '/app/'
+          },
+          module: {
+            loaders: [
+              {
+                test: /\.js$/,
+                include: path.resolve(__dirname, 'src'),
+                loader: 'babel-loader',
+                query: {
+                  presets: ['react', 'es2015']
+                }
+              },
+              {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader'
+              }
+            ]
+          }
+        };
+    </li>
+    <li>
+      Create folder src/app
+      Create file src/app/index.js
+    </li>
+    <li>
+      Modify scripts
+        "scripts": {
+          "test": "echo \"Error: no test specified\" && exit 1",
+          "start": "npm run build",
+          "build": "webpack -d && webpack-dev-server --content-base src/ --inline --hot --port 1234 --history-api-fallback"
+        },
+    </li>
+    <li>
+      Modify index.html
+        <script src="/app/bundle.js"></script>
+    </li>
+  </ul>
+</body>
+</html>
